@@ -1,0 +1,109 @@
+import { PageLinkField, Subject } from "@microsoft/msfs-sdk";
+import { FmcCmuCommons, WT21FmcPage } from "@microsoft/msfs-wt21-fmc";
+import { fetchAcarsMessages } from "../AcarsService.mjs";
+import { convertUnixToHHMM } from "../Hoppie.mjs";
+
+
+export default class DatalinkSendMessagesPage extends WT21FmcPage {
+  constructor(
+    bus,
+    screen,
+    props,
+    fms,
+    /** @deprecated */
+    baseInstrument, // TODO we should really not have this here
+    renderCallback,
+  ) {
+    super(bus, screen, props, fms, baseInstrument, renderCallback);
+    this.messages = Subject.create([]);
+    this.clockField = FmcCmuCommons.createClockField(this, this.bus);
+    this.bus
+      .getSubscriber()
+      .on("acars_message_removal")
+      .handle((idv) => {
+        const current = this.messages.get().filter((e) => e.message._id !== idv);
+        
+        this.messages.set(current);
+        this.invalidate();
+      });
+    this.bus
+      .getSubscriber()
+      .on("acars_outgoing_message")
+      .handle((message) => {
+        const current = this.messages.get();
+        const entry = {
+          message,
+          link: PageLinkField.createLink(
+            this,
+            `<${message.content.substr(0, 23)}`,
+            "/datalink-extra/message",
+            false,
+            {
+              message,
+            },
+          ),
+        };
+      
+          current.unshift(entry);
+        
+        this.messages.set(current);
+        this.invalidate();
+      });
+
+    fetchAcarsMessages(this.bus, "send").then((messages) => {
+      const current = this.messages.get();
+      for (const message of messages) {
+        const entry = {
+          message,
+          link: PageLinkField.createLink(
+            this,
+            `<${message.content.substr(0, 23)}`,
+            "/datalink-extra/message",
+            false,
+            {
+              message,
+            },
+          ),
+        };
+    
+          current.unshift(entry);
+      }
+      this.messages.set(current);
+      this.invalidate();
+    });
+  }
+
+  render() {
+      const reqType = this.params.get("type");
+    return this.messages.get().filter(message => {
+      if ((reqType === "aoc" && message.cpdlc) || (reqType !== "aoc" && !message.cpdlc))
+        return false;
+      return true;
+    }).reduce((acc, val) => {
+      if (acc[acc.length - 1].length === 5)
+        acc.push([])
+      acc[acc.length - 1].push(val);
+      return acc;
+    }, [[]]).map((page) => {
+      const array = Array(10)
+        .fill()
+        .map((e) => []);
+      page.forEach((val, index) => {
+        const nn = index * 2;
+        array[nn] = [`${convertUnixToHHMM(val.message.ts)}[blue]`];
+        array[nn + 1] = [val.link];
+      });
+
+      return [
+        ["DL[blue]", this.PagingIndicator, "SEND MSGS[blue]"],
+        ...array,
+        [],
+        [
+          PageLinkField.createLink(this, "<RETURN", reqType === "aoc" ? "/datalink-menu": "/datalink-extra/fans"),
+          "",
+          this.clockField,
+        ],
+      ];
+    });
+  }
+}

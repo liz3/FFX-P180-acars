@@ -1,0 +1,18 @@
+<RPTInputs>
+	<RPTInput Path="S:\repos\p180-acars\ffx-p180-acars\PackageSources\Copys\ffx-p180-acars\files\liz3-ffx-p180-acars\p180-acars.js">
+		<Package Name="liz3-ffx-p180-acars">
+			<AssetGroup Name="files"/>
+		</Package>
+	</RPTInput>
+	<RPTInput Path="S:\repos\p180-acars\ffx-p180-acars\PackageDefinitions\liz3-ffx-p180-acars\ContentInfo\Thumbnail.jpg">
+		<Package Name="liz3-ffx-p180-acars">
+			<AssetGroup Name="ContentInfo"/>
+		</Package>
+	</RPTInput>
+	<RPTInput Path="S:\repos\p180-acars\ffx-p180-acars\PackageSources\Copys\ffx-p180-acars\files\Plugins\liz3-ffx-p180-acars.xml">
+		<Package Name="liz3-ffx-p180-acars">
+			<AssetGroup Name="files"/>
+		</Package>
+	</RPTInput>
+</RPTInputs>
+

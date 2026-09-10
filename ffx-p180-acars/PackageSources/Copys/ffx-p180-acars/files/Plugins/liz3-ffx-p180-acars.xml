@@ -1,0 +1,6 @@
+<Plugins>
+
+  <Plugin target="WT21_FMC">
+    coui://html_ui/liz3-ffx-p180-acars/p180-acars.js
+  </Plugin>
+</Plugins>
