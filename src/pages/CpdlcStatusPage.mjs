@@ -120,8 +120,7 @@ export class CpdlcStatusPage extends WT21FmcPage {
         nullValueString: "",
         /** @inheritDoc */
         format(value) {
-          if (!value || !value.length) return "";
-          return `${value}[blue]`;
+          return "";
         },
       },
       onSelected: async () => {
@@ -139,7 +138,21 @@ export class CpdlcStatusPage extends WT21FmcPage {
         }
         return false;
       },
+    }).bind(Subject.create(""));
+
+    
+    this.logoffText = new DisplayField(this, {
+      formatter: {
+        nullValueString: "",
+        /** @inheritDoc */
+        format(value) {
+          if (!value || !value.length) return "";
+          return `${value}[blue]`;
+        },
+      },
     }).bind(this.logoff);
+
+
 
     this.facility.sub((v) => {
       if (v.length === 4 && !this.send.get()) this.send.set("SEND LOGON*");
@@ -193,8 +206,8 @@ export class CpdlcStatusPage extends WT21FmcPage {
       [
         ["FANS[blue]", "", "LOGON/STATUS[blue]"],
         [` CDA[blue]`, "", this.activeField],
-        [` NDA[blue]`, "", this.pendingField],
-        ["", this.logoffButton],
+        [` NDA[blue]`, this.logoffButton, this.pendingField],
+        ["", this.logoffText],
         ["", "", "------------------------[blue]"],
         [],
         [],

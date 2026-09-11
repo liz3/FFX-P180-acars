@@ -1875,8 +1875,7 @@ ${content}`,
           nullValueString: "",
           /** @inheritDoc */
           format(value) {
-            if (!value || !value.length) return "";
-            return `${value}[blue]`;
+            return "";
           }
         },
         onSelected: async () => {
@@ -1893,6 +1892,16 @@ ${content}`,
             return true;
           }
           return false;
+        }
+      }).bind(import_msfs_sdk12.Subject.create(""));
+      this.logoffText = new import_msfs_sdk12.DisplayField(this, {
+        formatter: {
+          nullValueString: "",
+          /** @inheritDoc */
+          format(value) {
+            if (!value || !value.length) return "";
+            return `${value}[blue]`;
+          }
         }
       }).bind(this.logoff);
       this.facility.sub((v) => {
@@ -1931,8 +1940,8 @@ ${content}`,
         [
           ["FANS[blue]", "", "LOGON/STATUS[blue]"],
           [` CDA[blue]`, "", this.activeField],
-          [` NDA[blue]`, "", this.pendingField],
-          ["", this.logoffButton],
+          [` NDA[blue]`, this.logoffButton, this.pendingField],
+          ["", this.logoffText],
           ["", "", "------------------------[blue]"],
           [],
           [],
