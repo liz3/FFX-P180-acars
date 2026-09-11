@@ -1072,7 +1072,6 @@ ${content}`,
         const message = acars.messages.find((e) => e._id === v.id);
         if (message) {
           message.response(v.option);
-          updateReadState(bus, v.id);
           publisher.pub(
             "acars_message_state_update",
             {
@@ -1655,16 +1654,14 @@ ${content}`,
       return [];
     }
     checkReadState(message) {
-      if (!message.options || message.respondSend) {
-        this.bus.getPublisher().pub(
-          "acars_read_state",
-          {
-            id: message._id
-          },
-          true,
-          false
-        );
-      }
+      this.bus.getPublisher().pub(
+        "acars_read_state",
+        {
+          id: message._id
+        },
+        true,
+        false
+      );
     }
     render() {
       const message = this.params.get("message");

@@ -2,7 +2,9 @@
 	<CheckedOutPackages>
 		<Package Name="liz3-ffx-p180-acars"/>
 	</CheckedOutPackages>
-	<SelectedPackages/>
+	<SelectedPackages>
+		<Package Name="liz3-ffx-p180-acars"/>
+	</SelectedPackages>
 	<Filter/>
 	<ShowOnlyEdited>false</ShowOnlyEdited>
 </UserSettings>

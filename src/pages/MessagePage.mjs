@@ -110,7 +110,6 @@ export default class DatalinkMessagePage extends WT21FmcPage {
   }
   checkReadState(message) {
 
-    if (!message.options || message.respondSend) {
       this.bus.getPublisher().pub(
         "acars_read_state",
         {
@@ -120,7 +119,6 @@ export default class DatalinkMessagePage extends WT21FmcPage {
         true,
         false,
       );
-    }
 
   }
   render() {

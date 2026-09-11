@@ -9,6 +9,21 @@
 			<AssetGroup Name="ContentInfo"/>
 		</Package>
 	</RPTInput>
+	<RPTInput Path="S:\repos\hawker-800xp-acars\ffx-hawker800xp-acars\PackageSources\Copys\ffx-hawker800xp-acars\files\Plugins\liz3-ffx-hawker800xp-acars.xml">
+		<Package Name="liz3-ffx-hawker800xp-acars">
+			<AssetGroup Name="files"/>
+		</Package>
+	</RPTInput>
+	<RPTInput Path="S:\repos\hawker-800xp-acars\ffx-hawker800xp-acars\PackageDefinitions\liz3-ffx-hawker800xp-acars\ContentInfo\Thumbnail.jpg">
+		<Package Name="liz3-ffx-hawker800xp-acars">
+			<AssetGroup Name="ContentInfo"/>
+		</Package>
+	</RPTInput>
+	<RPTInput Path="S:\repos\hawker-800xp-acars\ffx-hawker800xp-acars\PackageSources\Copys\ffx-hawker800xp-acars\files\liz3-ffx-hawker800xp-acars\hawker800xp-acars.js">
+		<Package Name="liz3-ffx-hawker800xp-acars">
+			<AssetGroup Name="files"/>
+		</Package>
+	</RPTInput>
 	<RPTInput Path="S:\repos\p180-acars\ffx-p180-acars\PackageSources\Copys\ffx-p180-acars\files\Plugins\liz3-ffx-p180-acars.xml">
 		<Package Name="liz3-ffx-p180-acars">
 			<AssetGroup Name="files"/>
